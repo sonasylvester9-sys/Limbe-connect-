@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0757B8">
+
+<title>Limbe Connect</title>
+
+<style>
+
+:root{
+--blue:#0757B8;
+--blue2:#087CEB;
+--yellow:#FFD700;
+--bg:#F3F6FA;
+--card:#FFFFFF;
+--text:#142033;
+--muted:#718096;
+--border:#DDE5EF;
+--danger:#E53935;
+--green:#20A464;
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:Arial,Segoe UI,sans-serif;
+padding-bottom:85px;
+transition:.3s;
+}
+
+body.dark{
+--bg:#101827;
+--card:#182437;
+--text:#F5F7FA;
+--muted:#AAB5C5;
+--border:#2B3A50;
+}
+
+/* HEADER */
+
+.header{
+position:sticky;
+top:0;
+z-index:100;
+height:65px;
+background:linear-gradient(
+135deg,
+var(--blue),
+var(--blue2)
+);
+color:white;
+box-shadow:0 3px 15px #0004;
+}
+
+.header-inner{
+height:100%;
+padding:0 15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:21px;
+font-weight:bold;
+}
+
+.logo span{
+color:var(--yellow);
+}
+
+.header-actions{
+display:flex;
+gap:7px;
+}
+
+.header-btn{
+width:40px;
+height:40px;
+border:0;
+border-radius:50%;
+background:#ffffff22;
+color:white;
+font-size:18px;
+}
+
+/* LAYOUT */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:15px;
+display:grid;
+grid-template-columns:210px 1fr 240px;
+gap:18px;
+}
+
+.main{
+min-width:0;
+}
+
+.sidebar{
+position:sticky;
+top:80px;
+height:max-content;
+}
+
+.menu{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+padding:8px;
+}
+
+.menu button{
+width:100%;
+border:0;
+background:none;
+color:var(--text);
+padding:13px;
+border-radius:10px;
+text-align:left;
+font-weight:bold;
+margin-bottom:3px;
+}
+
+.menu button:hover,
+.menu button.active{
+background:#E7F1FF;
+color:var(--blue);
+}
+
+/* CARDS */
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:18px;
+padding:16px;
+margin-bottom:16px;
+box-shadow:0 4px 18px #0000000b;
+}
+
+.title{
+font-size:18px;
+font-weight:bold;
+margin-bottom:14px;
+}
+
+/* PROFILE */
+
+.profile{
+padding:0;
+overflow:hidden;
+}
+
+.cover{
+height:140px;
+background:linear-gradient(
+135deg,
+#0757B8,
+#087CEB,
+#12A7FF
+);
+position:relative;
+}
+
+.cover-text{
+position:absolute;
+bottom:14px;
+left:18px;
+color:white;
+font-weight:bold;
+}
+
+.profile-body{
+padding:0 18px 18px;
+}
+
+.avatar{
+width:95px;
+height:95px;
+margin-top:-47px;
+border-radius:50%;
+border:4px solid white;
+background:linear-gradient(
+135deg,
+#0757B8,
+#FFD700
+);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:35px;
+font-weight:bold;
+overflow:hidden;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.profile-name{
+font-size:24px;
+font-weight:bold;
+margin-top:9px;
+}
+
+.profile-info{
+color:var(--muted);
+margin-top:5px;
+}
+
+.bio{
+margin-top:10px;
+line-height:1.5;
+}
+
+.stats{
+display:flex;
+justify-content:space-around;
+text-align:center;
+border-top:1px solid var(--border);
+margin-top:18px;
+padding-top:15px;
+}
+
+.stats b{
+display:block;
+color:var(--blue);
+font-size:21px;
+}
+
+.stats small{
+color:var(--muted);
+}
+
+/* BUTTONS */
+
+.primary{
+background:var(--blue);
+color:white;
+border:0;
+border-radius:10px;
+padding:11px 17px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.secondary{
+background:transparent;
+color:var(--blue);
+border:1px solid var(--blue);
+border-radius:10px;
+padding:10px 15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.danger{
+background:transparent;
+color:var(--danger);
+border:1px solid var(--danger);
+border-radius:10px;
+padding:9px 13px;
+font-weight:bold;
+}
+
+/* DISCOVER SEARCH */
+
+.search-box{
+display:flex;
+gap:8px;
+margin-bottom:18px;
+}
+
+.search-box input{
+flex:1;
+padding:13px;
+border:1px solid var(--border);
+border-radius:11px;
+background:var(--bg);
+color:var(--text);
+font-size:15px;
+outline:none;
+}
+
+.search-box button{
+border:0;
+background:var(--blue);
+color:white;
+border-radius:11px;
+padding:0 17px;
+font-size:18px;
+}
+
+/* STUDENT CARD */
+
+.student-card{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px 0;
+border-bottom:1px solid var(--border);
+}
+
+.student-card:last-child{
+border-bottom:0;
+}
+
+.student-avatar{
+width:58px;
+height:58px;
+min-width:58px;
+border-radius:50%;
+background:linear-gradient(
+135deg,
+var(--blue),
+#12A7FF
+);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+overflow:hidden;
+}
+
+.student-avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.student-info{
+flex:1;
+min-width:0;
+}
+
+.student-name{
+font-weight:bold;
+font-size:16px;
+}
+
+.student-details{
+font-size:12px;
+color:var(--muted);
+margin-top:4px;
+}
+
+.student-actions{
+display:flex;
+gap:5px;
+flex-wrap:wrap;
+justify-content:flex-end;
+}
+
+.student-actions button{
+padding:8px 10px;
+font-size:12px;
+}
+
+/* ONLINE */
+
+.online-dot{
+display:inline-block;
+width:8px;
+height:8px;
+background:var(--green);
+border-radius:50%;
+margin-right:4px;
+}
+
+/* FRIEND REQUEST */
+
+.request-card{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px 0;
+border-bottom:1px solid var(--border);
+}
+
+.request-actions{
+display:flex;
+gap:5px;
+}
+
+.accept{
+border:0;
+background:var(--green);
+color:white;
+padding:8px 11px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.decline{
+border:0;
+background:#E9EDF2;
+color:#555;
+padding:8px 11px;
+border-radius:8px;
+font-weight:bold;
+}
+
+/* EMPTY */
+
+.empty{
+text-align:center;
+padding:30px 15px;
+color:var(--muted);
+}
+
+.empty-icon{
+font-size:45px;
+margin-bottom:10px;
+}
+
+/* PROFILE MODAL */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#0009;
+z-index:500;
+align-items:center;
+justify-content:center;
+padding:15px;
+}
+
+.modal-box{
+width:100%;
+max-width:450px;
+max-height:90vh;
+overflow:auto;
+background:var(--card);
+color:var(--text);
+border-radius:20px;
+padding:20px;
+}
+
+.close{
+float:right;
+border:0;
+background:none;
+color:var(--text);
+font-size:22px;
+cursor:pointer;
+}
+
+/* FRIEND PROFILE */
+
+.friend-profile-head{
+text-align:center;
+}
+
+.friend-profile-avatar{
+width:110px;
+height:110px;
+margin:auto;
+border-radius:50%;
+overflow:hidden;
+background:linear-gradient(
+135deg,
+var(--blue),
+var(--yellow)
+);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+font-weight:bold;
+color:white;
+}
+
+.friend-profile-avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* FORM */
+
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+display:block;
+font-weight:bold;
+margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+width:100%;
+padding:13px;
+border:1px solid var(--border);
+border-radius:10px;
+background:var(--bg);
+color:var(--text);
+}
+
+/* PHOTO */
+
+.photo-area{
+text-align:center;
+margin-bottom:20px;
+}
+
+.photo-preview{
+width:120px;
+height:120px;
+margin:auto;
+border-radius:50%;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(
+135deg,
+#0757B8,
+#FFD700
+);
+color:white;
+font-size:45px;
+font-weight:bold;
+border:4px solid white;
+}
+
+.photo-preview img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.photo-button{
+display:inline-block;
+margin-top:12px;
+background:var(--blue);
+color:white;
+padding:12px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#photoInput{
+display:none;
+}
+
+/* SETTINGS */
+
+.setting-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 0;
+border-bottom:1px solid var(--border);
+}
+
+.setting-left{
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+.setting-icon{
+font-size:25px;
+}
+
+/* SWITCH */
+
+.switch{
+position:relative;
+width:48px;
+height:26px;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+inset:0;
+background:#B9C2CC;
+border-radius:20px;
+}
+
+.slider:before{
+content:"";
+position:absolute;
+width:20px;
+height:20px;
+left:3px;
+top:3px;
+background:white;
+border-radius:50%;
+transition:.2s;
+}
+
+.switch input:checked + .slider{
+background:var(--blue);
+}
+
+.switch input:checked + .slider:before{
+transform:translateX(22px);
+}
+
+/* POSTS */
+
+textarea{
+width:100%;
+min-height:100px;
+resize:none;
+padding:13px;
+border:1px solid var(--border);
+border-radius:13px;
+background:var(--bg);
+color:var(--text);
+font-size:15px;
+outline:none;
+}
+
+.post-tools{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:10px;
+}
+
+.emojis button{
+border:0;
+background:none;
+font-size:22px;
+}
+
+.post{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:18px;
+padding:16px;
+margin-bottom:16px;
+}
+
+.post-head{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.small-avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+background:var(--blue);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+overflow:hidden;
+}
+
+.small-avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.username{
+font-weight:bold;
+}
+
+.meta{
+color:var(--muted);
+font-size:12px;
+margin-top:3px;
+}
+
+.post-text{
+margin:15px 0;
+line-height:1.55;
+white-space:pre-wrap;
+}
+
+.reactions{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+}
+
+.react{
+border:0;
+border-radius:20px;
+padding:8px 12px;
+background:var(--bg);
+color:var(--text);
+}
+
+/* CHALLENGE */
+
+.challenge{
+background:linear-gradient(
+135deg,
+#FFD700,
+#FFF09A
+);
+color:#173D6C;
+}
+
+.challenge h2{
+margin-top:0;
+}
+
+.challenge button{
+border:0;
+padding:11px 17px;
+border-radius:10px;
+background:#073B78;
+color:white;
+font-weight:bold;
+}
+
+/* LEADERBOARD */
+
+.leader{
+display:flex;
+align-items:center;
+gap:10px;
+padding:11px 0;
+border-bottom:1px solid var(--border);
+}
+
+.leader:last-child{
+border-bottom:0;
+}
+
+.rank{
+width:28px;
+font-size:20px;
+}
+
+.leader-name{
+flex:1;
+}
+
+.points{
+color:var(--blue);
+font-weight:bold;
+}
+
+/* PAGES */
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+/* MOBILE NAV */
+
+.bottom-nav{
+display:none;
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:75px;
+background:var(--card);
+border-top:1px solid var(--border);
+z-index:300;
+justify-content:space-around;
+align-items:center;
+}
+
+.bottom-nav button{
+border:0;
+background:none;
+color:var(--muted);
+font-size:10px;
+min-width:48px;
+}
+
+.bottom-nav button div{
+font-size:21px;
+margin-bottom:3px;
+}
+
+.bottom-nav button.active{
+color:var(--blue);
+font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+.container{
+display:block;
+padding:10px 8px;
+}
+
+.sidebar,
+.rightbar{
+display:none;
+}
+
+.bottom-nav{
+display:flex;
+}
+
+}
+
+@media(max-width:500px){
+
+.logo{
+font-size:18px;
+}
+
+.header-btn{
+width:36px;
+height:36px;
+}
+
+.cover{
+height:125px;
+}
+
+.profile-name{
+font-size:22px;
+}
+
+.student-card{
+align-items:flex-start;
+}
+
+.student-actions{
+flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="header-inner">
+
+<div class="logo">
+Limbe <span>Connect</span> 💙
+</div>
+
+<div class="header-actions">
+
+<button class="header-btn"
+onclick="searchComing()">
+🔍
+</button>
+
+<button class="header-btn"
+onclick="showNotifications()">
+🔔
+</button>
+
+<button class="header-btn"
+onclick="toggleDark()">
+🌙
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- DESKTOP MENU -->
+
+<aside class="sidebar">
+
+<div class="menu">
+
+<button onclick="showPage('home',this)" class="active">
+🏠 Home
+</button>
+
+<button onclick="showPage('discover',this)">
+👥 Discover
+</button>
+
+<button onclick="showPage('challenges',this)">
+🔥 Challenges
+</button>
+
+<button onclick="showPage('vibes',this)">
+🏆 Vibes
+</button>
+
+<button onclick="showPage('profile',this)">
+👤 Profile
+</button>
+
+<button onclick="showPage('settings',this)">
+⚙️ Settings
+</button>
+
+</div>
+
+</aside>
+
+
+<main class="main">
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+
+<div class="card profile">
+
+<div class="cover">
+
+<div class="cover-text">
+🌴 Limbe • Cameroon
+</div>
+
+</div>
+
+<div class="profile-body">
+
+<div class="avatar" id="mainAvatar">
+S
+</div>
+
+<div class="profile-name"
+id="mainName">
+Director Sylvester
+</div>
+
+<div class="profile-info"
+id="mainInfo">
+🎓 Student • Limbe, Cameroon
+</div>
+
+<div class="bio"
+id="mainBio">
+Welcome to my Limbe Connect profile! 💙💛
+</div>
+
+<br>
+
+<button class="primary"
+onclick="openProfileEditor()">
+✏️ Edit Profile
+</button>
+
+<div class="stats">
+
+<div>
+<b id="vibeCount">10</b>
+<small>Vibes</small>
+</div>
+
+<div>
+<b id="postCount">0</b>
+<small>Posts</small>
+</div>
+
+<div>
+<b id="friendCount">0</b>
+<small>Friends</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FRIEND REQUEST PREVIEW -->
+
+<div class="card"
+id="requestPreview"
+style="display:none">
+
+<div class="title">
+📩 Friend Requests
+</div>
+
+<div id="homeRequests"></div>
+
+</div>
+
+
+<!-- POST -->
+
+<div class="card">
+
+<div class="title">
+What's happening in Limbe today? 🌴
+</div>
+
+<textarea
+id="postText"
+placeholder="Share something with your school community..."
+></textarea>
+
+<div class="post-tools">
+
+<div class="emojis">
+
+<button onclick="addEmoji('😂')">😂</button>
+<button onclick="addEmoji('🔥')">🔥</button>
+<button onclick="addEmoji('❤️')">❤️</button>
+<button onclick="addEmoji('🎓')">🎓</button>
+<button onclick="addEmoji('🌴')">🌴</button>
+
+</div>
+
+<button class="primary"
+onclick="createPost()">
+Post
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card challenge">
+
+<h2>🔥 DAILY CHALLENGE</h2>
+
+<h3>
+Funniest "Light don go" Story
+</h3>
+
+<p>
+Tell the funniest thing that happened during a blackout.
+</p>
+
+<p>
+🏆 Winner gets <b>+50 Vibe Points</b>
+</p>
+
+<button onclick="acceptChallenge()">
+🎯 Accept Challenge
+</button>
+
+</div>
+
+
+<div id="feed"></div>
+
+</section>
+
+
+<!-- DISCOVER -->
+
+<section id="discover" class="page">
+
+<div class="card">
+
+<div class="title">
+👥 Discover Students
+</div>
+
+<p style="color:var(--muted)">
+Find students and friends around Limbe.
+</p>
+
+
+<div class="search-box">
+
+<input
+id="studentSearch"
+placeholder="🔎 Search students..."
+oninput="searchStudents()"
+>
+
+<button onclick="searchStudents()">
+🔍
+</button>
+
+</div>
+
+
+<div id="studentList"></div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+📩 Friend Requests
+
+<span
+id="requestBadge"
+style="
+background:#E53935;
+color:white;
+padding:3px 8px;
+border-radius:15px;
+font-size:12px;
+display:none;
+">
+0
+</span>
+
+</div>
+
+<div id="requestsList"></div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+👥 My Friends
+</div>
+
+<div id="friendsList"></div>
+
+</div>
+
+</section>
+
+
+<!-- CHALLENGES -->
+
+<section id="challenges" class="page">
+
+<div class="card">
+
+<div class="title">
+🔥 Limbe Challenges
+</div>
+
+<div class="leader">
+
+<div class="rank">😂</div>
+
+<div class="leader-name">
+<b>Funniest School Story</b>
+<br>
+<small>Make students laugh.</small>
+</div>
+
+<div class="points">+50</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">📸</div>
+
+<div class="leader-name">
+<b>Best Limbe Photo</b>
+<br>
+<small>Show your favourite Limbe moment.</small>
+</div>
+
+<div class="points">+30</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">🧠</div>
+
+<div class="leader-name">
+<b>Brain Challenge</b>
+<br>
+<small>Test your knowledge.</small>
+</div>
+
+<div class="points">+40</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">⚽</div>
+
+<div class="leader-name">
+<b>Sports Challenge</b>
+<br>
+<small>Compete with students.</small>
+</div>
+
+<div class="points">+35</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- VIBES -->
+
+<section id="vibes" class="page">
+
+<div class="card">
+
+<div class="title">
+🏆 Vibe Leaderboard
+</div>
+
+<div class="leader">
+
+<div class="rank">👑</div>
+
+<div class="leader-name">
+<b id="leaderName">
+Director Sylvester
+</b>
+
+<br>
+
+<small>
+Student of the Week
+</small>
+
+</div>
+
+<div class="points"
+id="leaderPoints">
+10
+</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">🥈</div>
+
+<div class="leader-name">
+B.I.R
+</div>
+
+<div class="points">
+18
+</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">🥉</div>
+
+<div class="leader-name">
+Ntemessi
+</div>
+
+<div class="points">
+12
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="card">
+
+<div style="text-align:center">
+
+<div class="avatar"
+id="profileAvatar"
+style="margin:auto">
+S
+</div>
+
+<h2 id="profilePageName">
+Director Sylvester
+</h2>
+
+<p id="profilePageInfo">
+🎓 Student • Limbe
+</p>
+
+<p id="profilePageBio">
+Welcome to my Limbe Connect profile! 💙💛
+</p>
+
+<button class="primary"
+onclick="openProfileEditor()">
+✏️ Edit Profile
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page">
+
+<div class="card">
+
+<div class="title">
+⚙️ Settings
+</div>
+
+<div class="setting-item">
+
+<div class="setting-left">
+
+<div class="setting-icon">🔐</div>
+
+<div>
+<b>Private Profile</b>
+<br>
+<small>Only approved students can view you.</small>
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="privateProfile"
+onchange="saveSettings()">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting-item">
+
+<div class="setting-left">
+
+<div class="setting-icon">💬</div>
+
+<div>
+<b>Allow Messages</b>
+<br>
+<small>Allow students to message you.</small>
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="allowMessages"
+checked
+onchange="saveSettings()">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting-item">
+
+<div class="setting-left">
+
+<div class="setting-icon">🌙</div>
+
+<div>
+<b>Dark Mode</b>
+<br>
+<small>Change the appearance.</small>
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="darkSwitch"
+onchange="switchDark(this)">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="setting-item">
+
+<div class="setting-left">
+
+<div class="setting-icon">🔔</div>
+
+<div>
+<b>Notifications</b>
+<br>
+<small>Receive Limbe Connect alerts.</small>
+</div>
+
+</div>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="notifications"
+checked
+onchange="saveSettings()">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- RIGHT -->
+
+<aside class="rightbar">
+
+<div class="card">
+
+<div class="title">
+🏆 Top Vibes
+</div>
+
+<div class="leader">
+
+<div class="rank">👑</div>
+
+<div class="leader-name">
+You
+</div>
+
+<div class="points"
+id="sidePoints">
+10
+</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">🥈</div>
+
+<div class="leader-name">
+B.I.R
+</div>
+
+<div class="points">
+18
+</div>
+
+</div>
+
+<div class="leader">
+
+<div class="rank">🥉</div>
+
+<div class="leader-name">
+Ntemessi
+</div>
+
+<div class="points">
+12
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+🔥 Trending
+</div>
+
+<p>#SchoolLife</p>
+<p>#Alevel</p>
+<p>#Football</p>
+<p>#LimbeStudents</p>
+
+</div>
+
+</aside>
+
+</div>
+
+
+<!-- MOBILE NAV -->
+
+<nav class="bottom-nav">
+
+<button
+class="active"
+onclick="showPage('home',this)">
+
+<div>🏠</div>
+Home
+
+</button>
+
+<button
+onclick="showPage('discover',this)">
+
+<div>👥</div>
+Discover
+
+</button>
+
+<button
+onclick="showPage('challenges',this)">
+
+<div>🔥</div>
+Challenges
+
+</button>
+
+<button
+onclick="showPage('vibes',this)">
+
+<div>🏆</div>
+Vibes
+
+</button>
+
+<button
+onclick="showPage('profile',this)">
+
+<div>👤</div>
+Profile
+
+</button>
+
+<button
+onclick="showPage('settings',this)">
+
+<div>⚙️</div>
+Settings
+
+</button>
+
+</nav>
+
+
+<!-- PROFILE EDIT MODAL -->
+
+<div
+id="profileModal"
+class="modal">
+
+<div class="modal-box">
+
+<button class="close"
+onclick="closeProfileEditor()">
+✕
+</button>
+
+<h2>
+✏️ Edit Profile
+</h2>
+
+<div class="photo-area">
+
+<div
+class="photo-preview"
+id="photoPreview">
+S
+</div>
+
+<label
+for="photoInput"
+class="photo-button">
+
+📸 Add / Change Profile Picture
+
+</label>
+
+<input
+type="file"
+id="photoInput"
+accept="image/*"
+capture="user"
+onchange="selectPhoto(event)"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Full Display Name</label>
+
+<input
+id="editName"
+placeholder="Your full name"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>School</label>
+
+<select id="editSchool">
+
+<option value="">
+Select school
+</option>
+
+<option>GHS Limbe</option>
+<option>PHS Limbe</option>
+<option>GBHS Limbe</option>
+<option>Other School</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Class / Level</label>
+
+<select id="editLevel">
+
+<option value="">
+Select level
+</option>
+
+<option>Form 1</option>
+<option>Form 2</option>
+<option>Form 3</option>
+<option>Form 4</option>
+<option>Form 5</option>
+<option>Lower Sixth</option>
+<option>Upper Sixth</option>
+<option>University</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Bio</label>
+
+<input
+id="editBio"
+placeholder="Tell students something about you..."
+>
+
+</div>
+
+
+<button
+class="primary"
+onclick="saveProfile()"
+style="width:100%">
+
+💾 Save Profile
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FRIEND PROFILE MODAL -->
+
+<div
+id="friendModal"
+class="modal">
+
+<div class="modal-box">
+
+<button class="close"
+onclick="closeFriendProfile()">
+✕
+</button>
+
+<div id="friendProfileContent"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ============================
+YOUR PROFILE
+============================ */
+
+let profile =
+JSON.parse(
+localStorage.getItem("limbeProfile")
+) || {
+
+name:"Director Sylvester",
+school:"",
+level:"",
+bio:"Welcome to my Limbe Connect profile! 💙💛",
+photo:""
+
+};
+
+
+/* ============================
+VIBES
+============================ */
+
+let vibes =
+parseInt(
+localStorage.getItem("limbeVibes")
+) || 10;
+
+
+/* ============================
+POSTS
+============================ */
+
+let posts =
+JSON.parse(
+localStorage.getItem("limbePosts")
+) || [];
+
+
+/* ============================
+DEMO STUDENTS
+============================ */
+
+const students = [
+
+{
+id:1,
+name:"Alex",
+school:"GHS Limbe",
+level:"Upper Sixth",
+bio:"Football lover ⚽ and proud Limbe student.",
+photo:"",
+online:true
+},
+
+{
+id:2,
+name:"B.I.R",
+school:"PHS Limbe",
+level:"Lower Sixth",
+bio:"School, friends and good vibes 💙",
+photo:"",
+online:true
+},
+
+{
+id:3,
+name:"Ntemessi",
+school:"GBHS Limbe",
+level:"Upper Sixth",
+bio:"Always ready for a challenge 🔥",
+photo:"",
+online:false
+},
+
+{
+id:4,
+name:"Brenda",
+school:"GHS Limbe",
+level:"Form 5",
+bio:"Music 🎵 • Books 📚 • Limbe 🌴",
+photo:"",
+online:true
+},
+
+{
+id:5,
+name:"Junior",
+school:"PHS Limbe",
+level:"Upper Sixth",
+bio:"Future entrepreneur 🚀",
+photo:"",
+online:false
+},
+
+{
+id:6,
+name:"Mabel",
+school:"GBHS Limbe",
+level:"Lower Sixth",
+bio:"Learning something new every day 🌟",
+photo:"",
+online:true
+}
+
+];
+
+
+/* ============================
+FRIENDS
+============================ */
+
+let friends =
+JSON.parse(
+localStorage.getItem("limbeFriends")
+) || [];
+
+
+/* ============================
+REQUESTS
+============================ */
+
+let requests =
+JSON.parse(
+localStorage.getItem("limbeRequests")
+) || [2];
+
+
+/* ============================
+START
+============================ */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+loadProfile();
+
+renderPosts();
+
+updateNumbers();
+
+loadSettings();
+
+renderStudents();
+
+renderRequests();
+
+renderFriends();
+
+});
+
+
+/* ============================
+NAVIGATION
+============================ */
+
+function showPage(page,button){
+
+document
+.querySelectorAll(".page")
+.forEach(
+p => p.classList.remove("active")
+);
+
+document
+.getElementById(page)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".menu button")
+.forEach(
+b => b.classList.remove("active")
+);
+
+document
+.querySelectorAll(".bottom-nav button")
+.forEach(
+b => b.classList.remove("active")
+);
+
+
+if(button){
+
+button.classList.add("active");
+
+}
+
+window.scrollTo(0,0);
+
+}
+
+
+/* ============================
+DISCOVER
+============================ */
+
+function renderStudents(){
+
+let container =
+document.getElementById(
+"studentList"
+);
+
+let search =
+document.getElementById(
+"studentSearch"
+);
+
+let term =
+search
+?
+search.value.toLowerCase()
+:
+"";
+
+
+let filtered =
+students.filter(
+student =>
+
+student.name.toLowerCase()
+.includes(term)
+
+||
+
+student.school.toLowerCase()
+.includes(term)
+
+||
+
+student.level.toLowerCase()
+.includes(term)
+
+);
+
+
+container.innerHTML="";
+
+
+if(filtered.length===0){
+
+container.innerHTML=`
+
+<div class="empty">
+
+<div class="empty-icon">🔎</div>
+
+No students found.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+filtered.forEach(
+student => {
+
+let isFriend =
+friends.includes(student.id);
+
+let hasRequest =
+requests.includes(student.id);
+
+
+let avatar =
+student.photo
+?
+`<img src="${student.photo}">`
+:
+escapeHTML(
+student.name.charAt(0)
+);
+
+
+let buttonHTML;
+
+
+if(isFriend){
+
+buttonHTML = `
+
+<button
+class="danger"
+onclick="removeFriend(${student.id})">
+
+Remove
+
+</button>
+
+`;
+
+}else if(hasRequest){
+
+buttonHTML = `
+
+<button
+class="secondary"
+disabled>
+
+Requested
+
+</button>
+
+`;
+
+}else{
+
+buttonHTML = `
+
+<button
+class="primary"
+onclick="sendRequest(${student.id})">
+
+➕ Add Friend
+
+</button>
+
+`;
+
+}
+
+
+container.innerHTML += `
+
+<div class="student-card">
+
+<div
+class="student-avatar">
+
+${avatar}
+
+</div>
+
+
+<div class="student-info">
+
+<div class="student-name">
+
+${escapeHTML(student.name)}
+
+</div>
+
+<div class="student-details">
+
+${student.online
+?
+'<span class="online-dot"></span>Online • '
+:
+''
+}
+
+${escapeHTML(student.school)}
+<br>
+
+🎓 ${escapeHTML(student.level)}
+
+</div>
+
+</div>
+
+
+<div class="student-actions">
+
+<button
+class="secondary"
+onclick="viewStudent(${student.id})">
+
+👤 View
+
+</button>
+
+${buttonHTML}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ============================
+SEARCH
+============================ */
+
+function searchStudents(){
+
+renderStudents();
+
+}
+
+
+/* ============================
+SEND REQUEST
+============================ */
+
+function sendRequest(id){
+
+if(
+friends.includes(id)
+||
+requests.includes(id)
+){
+
+return;
+
+}
+
+requests.push(id);
+
+saveSocialData();
+
+renderStudents();
+
+renderRequests();
+
+alert(
+"📩 Friend request sent!"
+);
+
+}
+
+
+/* ============================
+REQUESTS
+============================ */
+
+function renderRequests(){
+
+let container =
+document.getElementById(
+"requestsList"
+);
+
+let home =
+document.getElementById(
+"homeRequests"
+);
+
+container.innerHTML="";
+
+
+if(requests.length===0){
+
+container.innerHTML=`
+
+<div class="empty">
+
+<div class="empty-icon">👥</div>
+
+No new friend requests.
+
+</div>
+
+`;
+
+document.getElementById(
+"requestBadge"
+).style.display="none";
+
+document.getElementById(
+"requestPreview"
+).style.display="none";
+
+if(home){
+
+home.innerHTML="";
+
+}
+
+return;
+
+}
+
+
+document.getElementById(
+"requestBadge"
+).style.display="inline";
+
+document.getElementById(
+"requestBadge"
+).innerText =
+requests.length;
+
+document.getElementById(
+"requestPreview"
+).style.display="block";
+
+
+let homeHTML="";
+
+
+requests.forEach(
+id => {
+
+let student =
+students.find(
+s => s.id===id
+);
+
+if(!student){
+
+return;
+
+}
+
+
+let avatar =
+student.photo
+?
+`<img src="${student.photo}">`
+:
+student.name.charAt(0);
+
+
+let html = `
+
+<div class="request-card">
+
+<div class="student-avatar">
+${avatar}
+</div>
+
+<div class="student-info">
+
+<div class="student-name">
+${escapeHTML(student.name)}
+</div>
+
+<div class="student-details">
+wants to be your friend
+</div>
+
+</div>
+
+<div class="request-actions">
+
+<button
+class="accept"
+onclick="acceptRequest(${id})">
+
+✓
+
+</button>
+
+<button
+class="decline"
+onclick="declineRequest(${id})">
+
+✕
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+
+container.innerHTML += html;
+
+homeHTML += html;
+
+});
+
+
+if(home){
+
+home.innerHTML =
+homeHTML;
+
+}
+
+}
+
+
+/* ============================
+ACCEPT REQUEST
+============================ */
+
+function acceptRequest(id){
+
+if(
+!friends.includes(id)
+){
+
+friends.push(id);
+
+}
+
+
+requests =
+requests.filter(
+r => r !== id
+);
+
+
+saveSocialData();
+
+renderRequests();
+
+renderFriends();
+
+renderStudents();
+
+updateNumbers();
+
+alert(
+"🎉 You are now friends!"
+);
+
+}
+
+
+/* ============================
+DECLINE
+============================ */
+
+function declineRequest(id){
+
+requests =
+requests.filter(
+r => r !== id
+);
+
+saveSocialData();
+
+renderRequests();
+
+renderStudents();
+
+}
+
+
+/* ============================
+FRIENDS LIST
+============================ */
+
+function renderFriends(){
+
+let container =
+document.getElementById(
+"friendsList"
+);
+
+container.innerHTML="";
+
+
+if(friends.length===0){
+
+container.innerHTML=`
+
+<div class="empty">
+
+<div class="empty-icon">👥</div>
+
+<h3>No friends yet</h3>
+
+<p>
+Go to Discover and add some students.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+friends.forEach(
+id => {
+
+let student =
+students.find(
+s => s.id===id
+);
+
+if(!student){
+
+return;
+
+}
+
+
+let avatar =
+student.photo
+?
+`<img src="${student.photo}">`
+:
+student.name.charAt(0);
+
+
+container.innerHTML += `
+
+<div class="student-card">
+
+<div class="student-avatar">
+
+${avatar}
+
+</div>
+
+<div class="student-info">
+
+<div class="student-name">
+${escapeHTML(student.name)}
+</div>
+
+<div class="student-details">
+
+${student.online
+?
+'<span class="online-dot"></span>Online'
+:
+'Offline'
+}
+
+<br>
+
+${escapeHTML(student.school)}
+
+</div>
+
+</div>
+
+<div class="student-actions">
+
+<button
+class="secondary"
+onclick="viewStudent(${student.id})">
+
+👤 View
+
+</button>
+
+<button
+class="danger"
+onclick="removeFriend(${student.id})">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ============================
+REMOVE FRIEND
+============================ */
+
+function removeFriend(id){
+
+let student =
+students.find(
+s => s.id===id
+);
+
+if(
+!confirm(
+"Remove "+student.name+
+" from your friends?"
+)
+){
+
+return;
+
+}
+
+friends =
+friends.filter(
+f => f !== id
+);
+
+saveSocialData();
+
+renderFriends();
+
+renderStudents();
+
+updateNumbers();
+
+}
+
+
+/* ============================
+VIEW STUDENT
+============================ */
+
+function viewStudent(id){
+
+let student =
+students.find(
+s => s.id===id
+);
+
+if(!student){
+
+return;
+
+}
+
+
+let avatar =
+student.photo
+?
+`<img src="${student.photo}">`
+:
+student.name.charAt(0);
+
+
+let isFriend =
+friends.includes(id);
+
+let requested =
+requests.includes(id);
+
+
+let action;
+
+
+if(isFriend){
+
+action = `
+
+<button
+class="danger"
+onclick="removeFriend(${id});closeFriendProfile()">
+
+Remove Friend
+
+</button>
+
+`;
+
+}else if(requested){
+
+action = `
+
+<button
+class="secondary"
+disabled>
+
+📩 Request Sent
+
+</button>
+
+`;
+
+}else{
+
+action = `
+
+<button
+class="primary"
+onclick="sendRequest(${id});closeFriendProfile()">
+
+➕ Add Friend
+
+</button>
+
+`;
+
+}
+
+
+document.getElementById(
+"friendProfileContent"
+).innerHTML = `
+
+<div class="friend-profile-head">
+
+<div class="friend-profile-avatar">
+
+${avatar}
+
+</div>
+
+<h2>
+${escapeHTML(student.name)}
+</h2>
+
+<p style="color:var(--muted)">
+
+${student.online
+?
+'🟢 Online'
+:
+'⚪ Offline'
+}
+
+</p>
+
+<p>
+🎓 ${escapeHTML(student.school)}
+</p>
+
+<p>
+📚 ${escapeHTML(student.level)}
+</p>
+
+<p>
+${escapeHTML(student.bio)}
+</p>
+
+<br>
+
+${action}
+
+</div>
+
+`;
+
+
+document.getElementById(
+"friendModal"
+).style.display =
+"flex";
+
+}
+
+
+/* ============================
+CLOSE FRIEND PROFILE
+============================ */
+
+function closeFriendProfile(){
+
+document.getElementById(
+"friendModal"
+).style.display =
+"none";
+
+}
+
+
+/* ============================
+SAVE SOCIAL DATA
+============================ */
+
+function saveSocialData(){
+
+localStorage.setItem(
+"limbeFriends",
+JSON.stringify(friends)
+);
+
+localStorage.setItem(
+"limbeRequests",
+JSON.stringify(requests)
+);
+
+}
+
+
+/* ============================
+PROFILE EDITOR
+============================ */
+
+function openProfileEditor(){
+
+document.getElementById(
+"editName"
+).value =
+profile.name;
+
+document.getElementById(
+"editSchool"
+).value =
+profile.school;
+
+document.getElementById(
+"editLevel"
+).value =
+profile.level;
+
+document.getElementById(
+"editBio"
+).value =
+profile.bio;
+
+
+if(profile.photo){
+
+document.getElementById(
+"photoPreview"
+).innerHTML =
+`<img src="${profile.photo}">`;
+
+}else{
+
+document.getElementById(
+"photoPreview"
+).innerText =
+profile.name.charAt(0);
+
+}
+
+
+document.getElementById(
+"profileModal"
+).style.display =
+"flex";
+
+}
+
+
+function closeProfileEditor(){
+
+document.getElementById(
+"profileModal"
+).style.display =
+"none";
+
+}
+
+
+/* ============================
+PHOTO
+============================ */
+
+function selectPhoto(event){
+
+let file =
+event.target.files[0];
+
+if(!file){
+
+return;
+
+}
+
+if(!file.type.startsWith("image/")){
+
+alert(
+"Please select an image."
+);
+
+return;
+
+}
+
+
+let reader =
+new FileReader();
+
+reader.onload =
+function(e){
+
+let img =
+new Image();
+
+img.onload =
+function(){
+
+let canvas =
+document.createElement(
+"canvas"
+);
+
+let max=600;
+
+let width=img.width;
+
+let height=img.height;
+
+
+if(width>height){
+
+if(width>max){
+
+height =
+height*max/width;
+
+width=max;
+
+}
+
+}else{
+
+if(height>max){
+
+width =
+width*max/height;
+
+height=max;
+
+}
+
+}
+
+
+canvas.width=width;
+
+canvas.height=height;
+
+
+let ctx =
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+
+profile.photo =
+canvas.toDataURL(
+"image/jpeg",
+0.75
+);
+
+
+document.getElementById(
+"photoPreview"
+).innerHTML =
+`<img src="${profile.photo}">`;
+
+};
+
+img.src=e.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ============================
+SAVE PROFILE
+============================ */
+
+function saveProfile(){
+
+let name =
+document.getElementById(
+"editName"
+).value.trim();
+
+
+if(name===""){
+
+alert(
+"Please enter your display name."
+);
+
+return;
+
+}
+
+
+profile.name=name;
+
+profile.school =
+document.getElementById(
+"editSchool"
+).value;
+
+profile.level =
+document.getElementById(
+"editLevel"
+).value;
+
+profile.bio =
+document.getElementById(
+"editBio"
+).value.trim();
+
+
+if(profile.bio===""){
+
+profile.bio =
+"Welcome to my Limbe Connect profile! 💙💛";
+
+}
+
+
+localStorage.setItem(
+"limbeProfile",
+JSON.stringify(profile)
+);
+
+loadProfile();
+
+closeProfileEditor();
+
+alert(
+"✅ Profile updated!"
+);
+
+}
+
+
+/* ============================
+LOAD PROFILE
+============================ */
+
+function loadProfile(){
+
+let avatar;
+
+if(profile.photo){
+
+avatar =
+`<img src="${profile.photo}">`;
+
+}else{
+
+avatar =
+profile.name.charAt(0)
+.toUpperCase();
+
+}
+
+
+document.getElementById(
+"mainAvatar"
+).innerHTML=avatar;
+
+document.getElementById(
+"profileAvatar"
+).innerHTML=avatar;
+
+
+document.getElementById(
+"mainName"
+).innerText =
+profile.name;
+
+document.getElementById(
+"profilePageName"
+).innerText =
+profile.name;
+
+
+let info="🎓 Student";
+
+
+if(profile.school){
+
+info +=
+" • "+profile.school;
+
+}
+
+if(profile.level){
+
+info +=
+" • "+profile.level;
+
+}
+
+
+document.getElementById(
+"mainInfo"
+).innerText=info;
+
+document.getElementById(
+"profilePageInfo"
+).innerText=info;
+
+
+document.getElementById(
+"mainBio"
+).innerText =
+profile.bio;
+
+document.getElementById(
+"profilePageBio"
+).innerText =
+profile.bio;
+
+
+document.getElementById(
+"leaderName"
+).innerText =
+profile.name;
+
+}
+
+
+/* ============================
+POSTS
+============================ */
+
+function createPost(){
+
+let input =
+document.getElementById(
+"postText"
+);
+
+let text =
+input.value.trim();
+
+
+if(text===""){
+
+alert(
+"Write something first."
+);
+
+return;
+
+}
+
+
+posts.unshift({
+
+id:Date.now(),
+
+name:profile.name,
+
+photo:profile.photo,
+
+text:text,
+
+likes:0,
+
+fire:0,
+
+laugh:0
+
+});
+
+
+vibes +=2;
+
+savePosts();
+
+saveVibes();
+
+input.value="";
+
+renderPosts();
+
+updateNumbers();
+
+}
+
+
+function renderPosts(){
+
+let feed =
+document.getElementById(
+"feed"
+);
+
+feed.innerHTML="";
+
+
+posts.forEach(
+post => {
+
+let avatar =
+post.photo
+?
+`<img src="${post.photo}">`
+:
+escapeHTML(
+post.name.charAt(0)
+);
+
+
+feed.innerHTML += `
+
+<div class="post">
+
+<div class="post-head">
+
+<div class="small-avatar">
+${avatar}
+</div>
+
+<div>
+
+<div class="username">
+${escapeHTML(post.name)}
+</div>
+
+<div class="meta">
+🎓 Student • Limbe
+</div>
+
+</div>
+
+</div>
+
+<div class="post-text">
+${escapeHTML(post.text)}
+</div>
+
+<div class="reactions">
+
+<button
+class="react"
+onclick="react(${post.id},'likes')">
+
+❤️ ${post.likes}
+
+</button>
+
+<button
+class="react"
+onclick="react(${post.id},'fire')">
+
+🔥 ${post.fire}
+
+</button>
+
+<button
+class="react"
+onclick="react(${post.id},'laugh')">
+
+😂 ${post.laugh}
+
+</button>
+
+<button
+class="react"
+onclick="deletePost(${post.id})">
+
+🗑️
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function react(id,type){
+
+let post =
+posts.find(
+p=>p.id===id
+);
+
+if(!post){
+
+return;
+
+}
+
+post[type]++;
+
+vibes++;
+
+savePosts();
+
+saveVibes();
+
+renderPosts();
+
+updateNumbers();
+
+}
+
+
+function deletePost(id){
+
+if(
+!confirm(
+"Delete this post?"
+)
+){
+
+return;
+
+}
+
+posts =
+posts.filter(
+p=>p.id!==id
+);
+
+savePosts();
+
+renderPosts();
+
+updateNumbers();
+
+}
+
+
+function savePosts(){
+
+localStorage.setItem(
+"limbePosts",
+JSON.stringify(posts)
+);
+
+}
+
+
+function saveVibes(){
+
+localStorage.setItem(
+"limbeVibes",
+vibes
+);
+
+}
+
+
+/* ============================
+NUMBERS
+============================ */
+
+function updateNumbers(){
+
+document.getElementById(
+"vibeCount"
+).innerText=vibes;
+
+document.getElementById(
+"postCount"
+).innerText=posts.length;
+
+document.getElementById(
+"friendCount"
+).innerText=friends.length;
+
+document.getElementById(
+"leaderPoints"
+).innerText=vibes;
+
+document.getElementById(
+"sidePoints"
+).innerText=vibes;
+
+}
+
+
+/* ============================
+EMOJI
+============================ */
+
+function addEmoji(emoji){
+
+let input =
+document.getElementById(
+"postText"
+);
+
+input.value += emoji;
+
+input.focus();
+
+}
+
+
+/* ============================
+CHALLENGE
+============================ */
+
+function acceptChallenge(){
+
+vibes +=5;
+
+saveVibes();
+
+updateNumbers();
+
+alert(
+"🎯 Challenge accepted!\n\n"+
+"You earned +5 Vibes."
+);
+
+}
+
+
+/* ============================
+DARK MODE
+============================ */
+
+function toggleDark(){
+
+let dark =
+document.body.classList.toggle(
+"dark"
+);
+
+localStorage.setItem(
+"limbeDark",
+dark
+);
+
+let box =
+document.getElementById(
+"darkSwitch"
+);
+
+if(box){
+
+box.checked=dark;
+
+}
+
+}
+
+
+function switchDark(box){
+
+if(box.checked){
+
+document.body.classList.add("dark");
+
+}else{
+
+document.body.classList.remove("dark");
+
+}
+
+localStorage.setItem(
+"limbeDark",
+box.checked
+);
+
+}
+
+
+/* ============================
+SETTINGS
+============================ */
+
+function saveSettings(){
+
+localStorage.setItem(
+"privateProfile",
+document.getElementById(
+"privateProfile"
+).checked
+);
+
+localStorage.setItem(
+"allowMessages",
+document.getElementById(
+"allowMessages"
+).checked
+);
+
+localStorage.setItem(
+"notifications",
+document.getElementById(
+"notifications"
+).checked
+);
+
+}
+
+
+function loadSettings(){
+
+let dark =
+localStorage.getItem(
+"limbeDark"
+);
+
+if(dark==="true"){
+
+document.body.classList.add("dark");
+
+document.getElementById(
+"darkSwitch"
+).checked=true;
+
+}
+
+document.getElementById(
+"privateProfile"
+).checked =
+localStorage.getItem(
+"privateProfile"
+)==="true";
+
+document.getElementById(
+"allowMessages"
+).checked =
+localStorage.getItem(
+"allowMessages"
+)!=="false";
+
+document.getElementById(
+"notifications"
+).checked =
+localStorage.getItem(
+"notifications"
+)!=="false";
+
+}
+
+
+/* ============================
+NOTIFICATIONS
+============================ */
+
+function showNotifications(){
+
+alert(
+"🔔 LIMBE CONNECT\n\n"+
+"📩 Check your friend requests\n"+
+"🔥 Daily challenge available\n"+
+"🏆 Keep earning Vibes"
+);
+
+}
+
+
+/* ============================
+SEARCH BUTTON
+============================ */
+
+function searchComing(){
+
+showPage(
+"discover",
+document.querySelector(
+'.bottom-nav button:nth-child(2)'
+)
+);
+
+document.getElementById(
+"studentSearch"
+).focus();
+
+}
+
+
+/* ============================
+ESCAPE HTML
+============================ */
+
+function escapeHTML(text){
+
+let div =
+document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
+
+}
+
+</script>
+
+</body>
+</html>
